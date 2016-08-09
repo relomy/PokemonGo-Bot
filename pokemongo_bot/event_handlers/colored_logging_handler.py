@@ -121,8 +121,8 @@ class ColoredLoggingHandler(EventHandler):
             message = '{}'.format(str(data))
 
         # Replace message if necessary
-        if event == 'catchable_pokemon':
-            message = 'Something rustles nearby!'
+        # if event == 'catchable_pokemon':
+            # message = 'Something rustles nearby!'
 
         # Truncate previous line if same event continues
         if event in ColoredLoggingHandler.CONTINUOUS_EVENT_NAMES and self._last_event == event:
@@ -147,15 +147,19 @@ class ColoredLoggingHandler(EventHandler):
 
         if color_name in ColoredLoggingHandler.COLOR_CODE:
             sys.stdout.write(
-                '[{time}] \033[{color}m{message}\033[0m'.format(
+                '[{time}] [{level}] [{event}] \033[{color}m{message}\033[0m'.format(
                     time=time.strftime("%H:%M:%S"),
+                    level=level,
+                    event=event,
                     color=ColoredLoggingHandler.COLOR_CODE[color_name],
                     message=message
                 )
             )
         else:
-            sys.stdout.write('[{time}] {message}'.format(
+            sys.stdout.write('[{time}] [{level}] [{event}] {message}'.format(
                 time=time.strftime("%H:%M:%S"),
+                level=level,
+                event=event,
                 message=message
             ))
 
