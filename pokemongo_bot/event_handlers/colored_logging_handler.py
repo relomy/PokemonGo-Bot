@@ -10,7 +10,7 @@ class ColoredLoggingHandler(EventHandler):
     EVENT_COLOR_MAP = {
         'api_error':                        'red',
         'bot_exit':                         'red',
-        'bot_start':                        'green',
+        'bot_start':                        'magenta',
         'config_error':                     'red',
         'egg_already_incubating':           'yellow',
         'egg_hatched':                      'green',
@@ -35,7 +35,7 @@ class ColoredLoggingHandler(EventHandler):
         'no_pokeballs':                     'red',
         'pokemon_appeared':                 'yellow',
         'pokemon_capture_failed':           'red',
-        'pokemon_caught':                   'blue',
+        'pokemon_caught':                   'magenta',
         'pokemon_evolved':                  'green',
         'pokemon_fled':                     'red',
         'pokemon_inventory_full':           'red',
@@ -94,7 +94,9 @@ class ColoredLoggingHandler(EventHandler):
         'green':    '92',
         'yellow':   '93',
         'blue':     '94',
-        'cyan':     '96'
+        'magenta':  '95',
+        'cyan':     '96',
+        'white':    '97'
     }
 
     def __init__(self):
@@ -121,8 +123,8 @@ class ColoredLoggingHandler(EventHandler):
             message = '{}'.format(str(data))
 
         # Replace message if necessary
-        # if event == 'catchable_pokemon':
-            # message = 'Something rustles nearby!'
+        if event == 'catchable_pokemon':
+            message = 'Something rustles nearby!'
 
         # Truncate previous line if same event continues
         if event in ColoredLoggingHandler.CONTINUOUS_EVENT_NAMES and self._last_event == event:
